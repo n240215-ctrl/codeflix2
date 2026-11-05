@@ -1,0 +1,53 @@
+/* flowviz.css - variable strip, clear loop flowchart and the "result" side box */
+.cf-top,.cf-main{display:none;margin:0}
+.cf-on .cf-top{display:flex}
+.cf-on .cf-main.has-loop{display:grid}
+.cf-top{flex-wrap:wrap;gap:10px;align-items:stretch;padding:10px 12px;border:2px solid #cfd6ff;border-radius:16px;background:linear-gradient(180deg,#f4f6ff,#eaf0ff)}
+.cf-top .cf-cap{align-self:center;font-weight:700;font-size:15px;color:#4a55b5;margin-right:4px}
+.cf-vbox{min-width:78px;max-width:170px;border:3px solid #1aa7d8;border-radius:12px;background:#fff;text-align:center;overflow:hidden;box-shadow:0 2px 6px rgba(26,167,216,.2)}
+.cf-vbox b{display:block;background:#1aa7d8;color:#fff;font-size:14px;padding:2px 8px;white-space:nowrap}
+.cf-vbox b small{opacity:.85;font-weight:500;margin-left:4px}
+.cf-vbox span{display:block;font:700 26px/1.3 Consolas,monospace;color:#0b3a58;padding:3px 8px;min-height:40px}
+.cf-vbox i{display:block;font-style:normal;font-size:12px;color:#b3541e;text-decoration:line-through;margin-top:-6px;padding-bottom:3px}
+.cf-vbox.chg{border-color:#7c3aed;box-shadow:0 0 16px rgba(124,58,237,.55);animation:cfpop .5s}
+.cf-vbox.chg b{background:#7c3aed}
+.cf-vbox.chg span{animation:cfin .5s}
+.cf-vbox .cf-cells{display:flex;gap:2px;justify-content:center;padding:4px;flex-wrap:wrap}
+.cf-vbox .cf-cells em{font-style:normal;font:700 14px Consolas,monospace;border:1px solid #1aa7d8;border-radius:4px;padding:1px 5px;background:#eaf8ff}
+.cf-vbox .cf-cells em.c{background:#ede3ff;border-color:#7c3aed}
+@keyframes cfpop{50%{transform:scale(1.12)}}
+@keyframes cfin{from{transform:translateY(-26px);opacity:0}}
+.cf-main{grid-template-columns:minmax(0,1.5fr) minmax(150px,.8fr);gap:12px;margin-top:0}
+@media(max-width:720px){.cf-main{grid-template-columns:1fr}}
+.cf-fc,.cf-res{border:2px solid #cfd6ff;border-radius:16px;background:#fff;padding:8px}
+.cf-fc h4,.cf-res h4{margin:0 0 4px;font-size:15px;color:#4a55b5}
+.cf-fc svg{width:100%;max-height:560px;display:block}
+.cf-n rect,.cf-n polygon{fill:#f4f6ff;stroke:#9aa7e6;stroke-width:3}
+.cf-n text{font:600 15px Consolas,monospace;fill:#1b2255;text-anchor:middle}
+.cf-n.init rect{fill:#e3f8ea;stroke:#2eaa5b}.cf-n.cond polygon{fill:#fff4d6;stroke:#e0a100}.cf-n.upd rect{fill:#ffe6f1;stroke:#e0408a}
+.cf-n.on rect,.cf-n.on polygon{stroke:#5b3df5;stroke-width:6;filter:drop-shadow(0 0 7px rgba(91,61,245,.7))}
+.cf-n.on.t polygon{stroke:#14a44d}.cf-n.on.f polygon{stroke:#e0344b}
+.cf-e{stroke:#8a96d8;stroke-width:3;fill:none}
+.cf-e.back{stroke:#e0408a;stroke-width:4;stroke-dasharray:10 6}
+.cf-e.hot{stroke:#5b3df5;stroke-width:6;animation:cfdash .6s linear infinite}
+.cf-e.back.hot{stroke:#e0408a}
+@keyframes cfdash{to{stroke-dashoffset:-32}}
+.cf-t{font:700 15px "Segoe UI",sans-serif}
+.cf-res{text-align:center;display:flex;flex-direction:column}
+.cf-rbox{position:relative;height:150px;border:4px solid #f0a500;border-radius:16px;background:#fff7e0;overflow:hidden}
+.cf-rbox em{position:absolute;left:0;right:0;top:44px;font:800 52px Consolas,monospace;font-style:normal;color:#8a5a00}
+.cf-rbox .o{color:#c9a35a;text-decoration:line-through;animation:cfout .9s forwards}
+.cf-rbox .n{animation:cfin2 .9s}
+@keyframes cfout{to{transform:translateY(95px);opacity:0}}
+@keyframes cfin2{from{transform:translateY(-95px);opacity:0}}
+.cf-hist{margin-top:8px;font-size:16px;color:#4a55b5;word-break:break-word}
+.cf-hist b{color:#8a5a00}
+.cf-res small{color:#666;margin-top:auto;padding-top:8px}
+
+
+/* Prevent old and new result values from occupying the same position. */
+.cf-rbox { height:auto; min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; padding:14px 8px; }
+.cf-rbox em { position:static; display:block; font-size:clamp(30px,4vw,46px); line-height:1.1; }
+.cf-rbox .o { color:#b45309; text-decoration:line-through; animation:cfout .7s ease both; }
+.cf-rbox .o::after { content:"↓"; display:block; margin-top:5px; color:#64748b; font:700 18px/1 sans-serif; text-decoration:none; }
+.cf-rbox .n { color:#047857; background:#dcfce7; border:2px solid #34d399; border-radius:10px; padding:4px 14px; animation:cfin2 .7s ease both; }
